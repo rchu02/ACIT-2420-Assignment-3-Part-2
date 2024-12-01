@@ -72,7 +72,7 @@ Now edit the two files, with
 ```
 sudo nvim documents/file-one
 ```
-For this file paste the following:
+For this file paste the following (you can change the contents on your second droplet, so you can see the difference between the two droplets):
 ```
 This is file one. Testing Download1
 ```
@@ -80,7 +80,7 @@ and for `file-two`, do
 ```
 sudo nvim documents/file-two
 ```
-and paste,
+and paste (you can change the contents on your second droplet, so you can see the difference between the two droplets),
 ```
 This is file two. Testing Download2
 ```
@@ -223,15 +223,13 @@ server {
 
     location /documents {
         root /var/lib/webgen;
-        autoindex on;                # Enables the directory listing
-        autoindex_exact_size off;    # Shows file sizes, human-readable
-        autoindex_localtime on;      # Displays file timestamps
+        autoindex on;               
+        autoindex_exact_size off;   
+        autoindex_localtime on;      
     }
 
-    # Default location for other requests (optional)
-    location / {
-        root /var/lib/webgen/HTML;
-        index index.html;
+	location / {
+        try_files $uri $uri/ =404;
     }
 }
 ```
