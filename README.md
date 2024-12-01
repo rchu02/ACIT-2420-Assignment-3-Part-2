@@ -16,12 +16,13 @@ We will be making two droplets and a load balancer on digital ocean before we mo
 2. Now select "Create Load Balancer".
 3. Now select the tag for "web" and make sure that the server is the same as your two droplet's servers.
 4. Create the load balancer and wait, as it will take a while. Make sure that both of the servers are disconnected as they are not hosting servers yet.
+5. Now connect to both droplets and follow the next tasks.
 
 > [!WARNING]
-> Make sure you do the following tasks for BOTH droplets.
+> Make sure you do tasks 1-4 for BOTH droplets.
 
 ## Task 1
-First we would have to create a new system user called `webgen`. We are creating a system user instead of a root user or regular user, because system users do not have a login shell, which makes them more secure from other users. The information we will be working with is sensitive data, so it is a good idea to keep it as secure as possible.
+First we will have to create a new system user called `webgen`. We are creating a system user instead of a root user or regular user, because system users do not have a login shell, which makes them more secure from other users. The information we will be working with is sensitive data, so it is a good idea to keep it as secure as possible.
 
 To make a system user, run the command, [^1]
 ```
@@ -165,15 +166,9 @@ sudo systemctl status generate-index.timer
 - Confirm that the `service` status is enabled and inactive.
 - Confirm that the `service` TriggeredBy is `generate-index.timer` and on
 - Confirm that the `timer` status is enabled and active.
-- Confirm that the `timer` Trigger time is `05:00:00 UTC`. 
+- Confirm that the `timer` Trigger time is `05:00:00 UTC`.  
 
-You will now have to wait till 05:00 UTC time till the script will run. If you wish to speed up the time, you can configure the `Calendar` in the `/etc/systemd/system/generate-index.timer` file to a minute after your current time (Keep in mind that the time is in UTC). Run `sudo systemctl daemon-reload` then check the status of the `generate-index.timer` to confirm and wait. 
-
-Once the time has been reached, you can confirm that the service file was run and the script was properly executed by first checking the status of the `service` file first with
-```
-sudo systemctl status generate-index.service
-```
-Then you can check if the HTML page isn't empty with HTML code, with
+You can check if the HTML page isn't empty with HTML code, using
 ```
 sudo cat /var/lib/webgen/HTML/index.html
 ```
@@ -321,9 +316,36 @@ and check if your output is similar to the following:
 ![Status of ufw](assests/status_of_ufw.png)
 
 ## Task 5
-Once you have finished all the steps, your page should look like this:
+> [!WARNING]
+> Make sure you finished tasks 1-4 for BOTH droplets before continuing on.
 
-![Picture of system info page](assests/Success_screenshot.png)
+Once you have finished configuring both of your droplets so that they are running nginx servers, go to your digital ocean account. Make sure that the load balancer is running now with both servers with a "healthy status".
+
+![Picture of healthy status for both droplets](assests/DO_healthy_status.png)
+
+Now you can go copy your **load balancer** ip-address and paste it on your web browser.
+
+![Picture of load balancer ip address](assests/load_balancer_ip.png)
+
+Your page should like the following:
+![Picture of load balancer ip address](assests/load_1.png)
+
+The public IP address of the server should be one of the ip address of one of the droplets that is connected with the load balancer.
+
+Now restart the page a couple times until you see a different public Ip address of the server, like so:
+![Picture of load balancer ip address](assests/load_2.png)
+
+You can go to the `/documents` path like so:
+![Picture of load balancer ip address](assests/documents.png)
+Now you can download each of the files, where `file-one` should contain:
+```
+This is file one. Testing Download1
+```
+and `file-two` should contain:
+```
+This is file two. Testing Download2
+```
+You have now completed all tasks!
 
 ## References
 
