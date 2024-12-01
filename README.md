@@ -41,15 +41,19 @@ sudo mkdir documents
 ```
 Now we will clone a repository that contains a script that creates an HTML page. Use the command,
 ```
-sudo git clone https://git.sr.ht/~nathan_climbs/2420-as2-start
+sudo git clone https://git.sr.ht/~nathan_climbs/2420-as3-p2-start
 ```
 Then, we will move the file from that repository to the `bin` directory.
 ```
-sudo mv 2420-as2-start/generate_index bin
+sudo mv 2420-as3-p2-start/generate_index bin
 ```
 And now create an `index.html` page inside the `HTML` by using the command,
 ```
 sudo touch HTML/index.html
+```
+In addition create a `file-one` and `file-two` file inside the `documents`
+```
+sudo touch documents/file-one documents/file-two
 ```
 You can delete the git repository directory now by running the command,
 ```
@@ -59,7 +63,7 @@ Now we will need to change the ownership of all the files and directories in the
 
 Run the command, 
 ```
-sudo chown -R /var/lib/webgen webgen
+sudo chown -R webgen /var/lib/webgen
 ```
 In addition, you will have to make the `generate_index` script executable, run
 ```
@@ -194,8 +198,17 @@ server {
     root /var/lib/webgen/HTML;
     index index.html;
 
-	location / {
-        try_files $uri $uri/ =404;
+    location /documents {
+        root /var/lib/webgen;
+        autoindex on;                # Enables the directory listing
+        autoindex_exact_size off;    # Shows file sizes, human-readable
+        autoindex_localtime on;      # Displays file timestamps
+    }
+
+    # Default location for other requests (optional)
+    location / {
+        root /var/lib/webgen/HTML;
+        index index.html;
     }
 }
 ```
@@ -219,7 +232,7 @@ http {
 ```
 Lastly, we have to create a symbolic link from the `sites-enabled/nginx-2420.conf` to `sites-available/nginx-2420.conf`. [^4] Run
 ```
-ln -s /etc/nginx/sites-available/nginx-2420.conf /etc/nginx/sites-enabled/nginx-2420.conf
+sudo ln -s /etc/nginx/sites-available/nginx-2420.conf /etc/nginx/sites-enabled/nginx-2420.conf
 ``` 
 Now we have to check if there are any errors inside of our `nginx.conf` file, so run
 ```
@@ -229,6 +242,10 @@ You should get the messages:
 ```
 nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
 nginx: configuration file /etc/nginx/nginx.conf test is successful
+```
+Now run the `nginx.service` file to get the server running.
+```
+sudo systemctl enable --now nginx.service
 ```
 We should now check if everything is running properly, run
 ```
