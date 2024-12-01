@@ -9,7 +9,16 @@
 - [References](#references)
 
 ## Introduction
-These tasks will guide you to create a simple `nginx` web server using services, timers and firewalls.
+These tasks will guide you to create a simple load balancer using the `nginx` web servers that utilizies services, timers and firewalls.
+
+We will be making two droplets and a load balancer on digital ocean before we move on to the tasks.
+1. First go to Digital Ocean using your account and create two droplets with the settings that you normally use. In addition add a tag called "web" for both droplets.
+2. Now select "Create Load Balancer".
+3. Now select the tag for "web" and make sure that the server is the same as your two droplet's servers.
+4. Create the load balancer and wait, as it will take a while. Make sure that both of the servers are disconnected as they are not hosting servers yet.
+
+> [!WARNING]
+> Make sure you do the following tasks for BOTH droplets.
 
 ## Task 1
 First we would have to create a new system user called `webgen`. We are creating a system user instead of a root user or regular user, because system users do not have a login shell, which makes them more secure from other users. The information we will be working with is sensitive data, so it is a good idea to keep it as secure as possible.
@@ -55,9 +64,25 @@ In addition create a `file-one` and `file-two` file inside the `documents`
 ```
 sudo touch documents/file-one documents/file-two
 ```
+Now edit the two files, with
+```
+sudo nvim documents/file-one
+```
+For this file paste the following:
+```
+This is file one. Testing Download1
+```
+and for `file-two`, do
+```
+sudo nvim documents/file-two
+```
+and paste,
+```
+This is file two. Testing Download2
+```
 You can delete the git repository directory now by running the command,
 ```
-sudo rm -rf 2420-as2-start
+sudo rm -rf 2420-as3-p2-start
 ```
 Now we will need to change the ownership of all the files and directories in the `/var/lib/webgen` home directory to the `webgen` user. 
 
