@@ -287,7 +287,15 @@ Now check the inital status with the following command:
 ```
 sudo ufw status verbose
 ```
-If there is an error, go to [Task 3's](#task-3) warning and follow the steps.
+There should be an error. Run the following command to restart your droplet:
+```
+sudo systemctl reboot
+```
+You will be kicked out of your droplet and you will have to wait around a minute before it starts again. Once you have waited, log back in and run 
+```
+sudo ufw status verbose
+```
+If there is still an error, go to [Task 3's](#task-3) warning and follow the steps.
 
 Then we can allow all `ssh` connections to the server with 
 ```
