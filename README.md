@@ -21,6 +21,9 @@ We will be making two droplets and a load balancer on digital ocean before we mo
 > [!WARNING]
 > Make sure you do tasks 1-4 for BOTH droplets.
 
+> [!TIP]
+> You can first create all the necessary files on your local machine and then use `sftp` to connect to both droplets and send all the necessary files to them.
+
 ## Task 1
 First we will have to create a new system user called `webgen`. We are creating a system user instead of a root user or regular user, because system users do not have a login shell, which makes them more secure from other users. The information we will be working with is sensitive data, so it is a good idea to keep it as secure as possible.
 
