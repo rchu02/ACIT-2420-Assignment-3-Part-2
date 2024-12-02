@@ -181,7 +181,7 @@ Now change directories to `nginx`, by
 ```
 cd /etc/nginx
 ```
-Now we will create two directories that will store our server blocks. [^4] 
+Now we will create two directories that will store our server blocks. [^3] 
 
 This allows us to easily enable and disable our server blocks instead of going inside the `nginx.conf` and finding the blocks from there. In addition this allows us to not make many mistakes inside the `nginx.conf` file, which will make troubleshooting easier.
 
@@ -243,7 +243,7 @@ http {
     ...
 }
 ```
-Lastly, we have to create a symbolic link from the `sites-enabled/nginx-2420.conf` to `sites-available/nginx-2420.conf`. [^4] Run
+Lastly, we have to create a symbolic link from the `sites-enabled/nginx-2420.conf` to `sites-available/nginx-2420.conf`. [^3] Run
 ```
 sudo ln -s /etc/nginx/sites-available/nginx-2420.conf /etc/nginx/sites-enabled/nginx-2420.conf
 ``` 
