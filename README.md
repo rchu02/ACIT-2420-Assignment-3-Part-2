@@ -25,7 +25,7 @@ We will be making two droplets and a load balancer on digital ocean before we mo
 > You can first create all the necessary files on your local machine and then use `sftp` to connect to both droplets and send all the necessary files to them.
 
 ## Task 1
-First we will have to create a new system user called `webgen`. We are creating a system user instead of a root user or regular user, because system users do not have a login shell, which makes them more secure from other users. The information we will be working with is sensitive data, so it is a good idea to keep it as secure as possible.
+First we will have to create a new system user called `webgen`.
 
 To make a system user, run the command, [^1]
 ```
@@ -44,13 +44,7 @@ cd /var/lib/webgen
 
 We will then create a `bin`, `documents` and `HTML` directories using the commands:
 ```
-sudo mkdir bin
-```
-```
-sudo mkdir HTML
-```
-```
-sudo mkdir documents
+sudo mkdir bin HTML documents
 ```
 Now we will clone a repository that contains a script that creates an HTML page. Use the command,
 ```
@@ -72,17 +66,17 @@ Now edit the two files, with
 ```
 sudo nvim documents/file-one
 ```
-For this file paste the following (you can change the contents on your second droplet, so you can see the difference between the two droplets):
+For this file paste the following:
 ```
-This is file one. Testing Download1
+This is file one.
 ```
 and for `file-two`, do
 ```
 sudo nvim documents/file-two
 ```
-and paste (you can change the contents on your second droplet, so you can see the difference between the two droplets),
+and paste,
 ```
-This is file two. Testing Download2
+This is file two. 
 ```
 You can delete the git repository directory now by running the command,
 ```
@@ -117,12 +111,10 @@ First we need to make a `generate-index.service` file so run,
 ```
 sudo nvim /etc/systemd/system/generate-index.service
 ```
-And paste the following code [^2] [^3]
+And paste the following code [^3]
 ```
 [Unit]
 Description=Run The Generate_Index Script
-Wants=network-online.target
-After=network-online.target
 
 [Service]
 ExecStart=/var/lib/webgen/bin/generate_index
@@ -148,7 +140,7 @@ Persistent=True
 [Install]
 WantedBy=timers.target
 ```
-Now we reload the `systemctl` service, run
+Now we reload all the `systemctd` unit files, run
 ```
 sudo systemctl daemon-reload
 ```
@@ -361,11 +353,8 @@ You have now completed all tasks!
 [^1]: https://linux.die.net/man/8/useradd
 Linux die.net (n.d.).
 
-[^2]: https://www.freedesktop.org/wiki/Software/systemd/NetworkTarget/ 
-Freedesktop.org (n.d.).
-
-[^3]: https://www.digitalocean.com/community/tutorials/understanding-systemd-units-and-unit-files
+[^2]: https://www.digitalocean.com/community/tutorials/understanding-systemd-units-and-unit-files
 Digital Ocean (n.d.).
 
-[^4]: https://wiki.archlinux.org/title/Nginx
+[^3]: https://wiki.archlinux.org/title/Nginx
 Arch Wiki 3.2.3.1 (n.d.).
