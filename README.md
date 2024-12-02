@@ -144,10 +144,11 @@ Now we reload all the `systemctd` unit files, run
 ```
 sudo systemctl daemon-reload
 ```
-Then to start and enable the services, run the two commands,
+Then to start the service file run:
 ```
-sudo systemctl enable --now generate-index.service
+sudo systemctl start generate-index.service
 ```
+To start and enable the timer run:
 ```
 sudo systemctl enable --now generate-index.timer
 ```
