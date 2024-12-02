@@ -111,10 +111,12 @@ First we need to make a `generate-index.service` file so run,
 ```
 sudo nvim /etc/systemd/system/generate-index.service
 ```
-And paste the following code. [^2]
+And paste the following code. [^2] [^4]
 ```
 [Unit]
 Description=Run The Generate_Index Script
+After=network-online.target
+Wants=network-online.target
 
 [Service]
 ExecStart=/var/lib/webgen/bin/generate_index
@@ -359,3 +361,6 @@ Digital Ocean (n.d.).
 
 [^3]: https://wiki.archlinux.org/title/Nginx
 Arch Wiki 3.2.3.1 (n.d.).
+
+[^4]: https://www.freedesktop.org/wiki/Software/systemd/NetworkTarget/
+FreeDesktop (n.d).
