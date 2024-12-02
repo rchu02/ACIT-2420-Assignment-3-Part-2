@@ -111,7 +111,7 @@ First we need to make a `generate-index.service` file so run,
 ```
 sudo nvim /etc/systemd/system/generate-index.service
 ```
-And paste the following code [^3]
+And paste the following code. [^2]
 ```
 [Unit]
 Description=Run The Generate_Index Script
@@ -243,7 +243,7 @@ http {
     ...
 }
 ```
-Lastly, we have to create a symbolic link from the `sites-enabled/nginx-2420.conf` to `sites-available/nginx-2420.conf`. [^3] Run
+Lastly, we have to create a symbolic link from the `sites-enabled/nginx-2420.conf` to `sites-available/nginx-2420.conf`. Run
 ```
 sudo ln -s /etc/nginx/sites-available/nginx-2420.conf /etc/nginx/sites-enabled/nginx-2420.conf
 ``` 
