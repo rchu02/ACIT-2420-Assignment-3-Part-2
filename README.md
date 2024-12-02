@@ -340,11 +340,11 @@ You can go to the `/documents` path like so:
 ![Picture of load balancer ip address](assests/documents.png)
 Now you can download each of the files, where `file-one` should contain:
 ```
-This is file one. Testing Download1
+This is file one.
 ```
 and `file-two` should contain:
 ```
-This is file two. Testing Download2
+This is file two.
 ```
 You have now completed all tasks!
 
