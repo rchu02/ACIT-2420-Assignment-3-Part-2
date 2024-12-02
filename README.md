@@ -122,9 +122,6 @@ Wants=network-online.target
 ExecStart=/var/lib/webgen/bin/generate_index
 User=webgen
 Group=webgen
-
-[Install]
-WantedBy=multi-user.target
 ```
 Now create a `generate-index.timer` file, run
 ```
