@@ -1,0 +1,9 @@
+[Unit]
+Description=Run The Generate_Index Script
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+ExecStart=/var/lib/webgen/bin/generate_index
+User=webgen
+Group=webgen
